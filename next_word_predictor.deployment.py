@@ -19,16 +19,16 @@ class Model(nn.Module):
         out = self.fc(out[:, -1, :])  # use last time step
         return out
 
-# Load vocab and config
-load_model = pickle.load(open("E:/ML Project/Next Word Predictor/next_word_prediction.sav", "rb"))   
+# Loading trained model 
+load_model = pickle.load(open("next_word_prediction.sav", "rb"))   
 
-# prompt: /content/idx2word.txt and /content/word2idx.txt . I gave you two path so open both of it 
+# Loading files  
 
-with open('E:/ML Project/Next Word Predictor/idx2word.txt', 'r' ,encoding="utf-8") as f1:
+with open('idx2word.txt', 'r' ,encoding="utf-8") as f1:
   idx2word_content = f1.read()
 
 
-with open('E:/ML Project/Next Word Predictor/word2idx.txt', 'r',encoding="utf-8") as f2:
+with open('word2idx.txt', 'r',encoding="utf-8") as f2:
   word2idx_content = f2.read()
   
 max_seq_len = 4  # max input length
@@ -79,7 +79,7 @@ def predict_next_word_gru(input_text, model, word2idx, idx2word, max_seq_len, de
     - word2idx (dict): word-to-index mapping
     - idx2word (dict): index-to-word mapping
     - max_seq_len (int): max input sequence length
-    - device (str): 'cpu' or 'cuda'
+    - device (str): 'cpu' or 'gpu'
 
     Returns:
     - str: predicted next word
